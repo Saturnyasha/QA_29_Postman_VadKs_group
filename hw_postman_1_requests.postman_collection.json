@@ -444,6 +444,11 @@
 							"});pm.test('Item_5-2_OI4',function(){",
 							"pm.expect(second_param_salary_response).to.deep.equal((req_OI4_salary)*4)",
 							"});",
+							"",
+							"let object = jsD_OI4.salary;",
+							"object.forEach(object => {",
+							"    console.log(object)",
+							"}); //цикл с перебором параметров в salary//",
 							""
 						],
 						"type": "text/javascript"
