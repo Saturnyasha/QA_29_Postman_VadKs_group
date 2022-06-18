@@ -16,49 +16,42 @@
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(300);",
+							"",
+							"let jsonData_OI2 = pm.response.json()",
+							"pm.test('Item_1 jsonData_OI2', function(){",
+							"    pm.expect(jsonData_OI2).to.have.property('start_qa_salary')",
 							"});",
 							"",
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(2000);",
+							"pm.test('Item_2 jsonData_OI2', function(){",
+							"    pm.expect(jsonData_OI2).to.have.property('salary')",
 							"});",
 							"",
-							"let jsonData = pm.response.json()",
-							"pm.test('Item_1 jsonData', function(){",
-							"    pm.expect(jsonData).to.have.property('start_qa_salary')",
+							"pm.test('Item_3 jsonData_OI2', function(){",
+							"    pm.expect(jsonData_OI2).to.have.property('qa_salary_after_1.5_year')",
 							"});",
 							"",
-							"pm.test('Item_2 jsonData', function(){",
-							"    pm.expect(jsonData).to.have.property('salary')",
+							"pm.test('Item_4 jsonData_OI2', function(){",
+							"    pm.expect(jsonData_OI2).to.have.property('u_name')",
 							"});",
 							"",
-							"pm.test('Item_3 jsonData', function(){",
-							"    pm.expect(jsonData).to.have.property('qa_salary_after_1.5_year')",
-							"});",
-							"",
-							"pm.test('Item_4 jsonData', function(){",
-							"    pm.expect(jsonData).to.have.property('u_name')",
-							"});",
-							"",
-							"pm.test('Item_5 jsonData', function(){",
-							"    pm.expect(jsonData.start_qa_salary).to.deep.equal(1500)",
+							"pm.test('Item_5-1 jsonData_OI2', function(){",
+							"    pm.expect(jsonData_OI2.start_qa_salary).to.deep.equal(1500)",
 							"})",
 							"",
-							"pm.test('Item_6 jsonData', function(){",
-							"    pm.expect(jsonData.start_qa_salary).to.deep.equal(2500)",
+							"pm.test('Item_5-2 jsonData_OI2', function(){",
+							"    pm.expect(jsonData_OI2.start_qa_salary).to.deep.equal(2500)",
 							"})",
 							"",
-							"pm.test('Item_7 jsonData', function(){",
-							"   pm.expect(jsonData.qa_salary_after_6_months).to.deep.equal(jsonData.start_qa_salary*2)",
+							"pm.test('Item_7 jsonData_OI2', function(){",
+							"   pm.expect(jsonData_OI2.qa_salary_after_6_months).to.deep.equal+(jsonData_OI2.start_qa_salary*2)",
 							"})",
 							"",
-							"pm.test('Item_8 jsonData', function(){",
-							"   pm.expect(jsonData.person.u_name[1]).to.deep.equal(1500)",
+							"pm.test('Item_8-1 jsonData_OI2', function(){",
+							"   pm.expect(jsonData_OI2.person.u_name[1]).to.deep.equal(1500)",
 							"})",
 							"",
-							"pm.test('Item_9 jsonData', function(){",
-							"   pm.expect(jsonData.person.u_name[1]).to.deep.equal(1900)",
+							"pm.test('Item_8-2 jsonData_OI2', function(){",
+							"   pm.expect(jsonData_OI2.person.u_name[1]).to.deep.equal(1900)",
 							"})",
 							"",
 							""
@@ -255,47 +248,58 @@
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
+							"let params = jsonData3.family;",
+							"console.log(params);",
+							"",
 							"pm.test('Item_1-1', function(){",
-							"    pm.expect(jsonData3.family.pets.dog).to.have.a.property('name')",
+							"    pm.expect(params.pets.dog).to.have.a.property('name')",
 							"});",
 							"pm.test('Item_1-2', function(){",
-							"    pm.expect(jsonData3.family.pets.dog).to.have.a.property('poroda')",
+							"    pm.expect(params.pets.dog).to.have.a.property('poroda')",
 							"});",
 							"",
 							"pm.test('Item_2-1', function(){",
-							"    pm.expect(jsonData3.family.pets.dog).to.have.a.property('age')",
+							"    pm.expect(params.pets.dog).to.have.a.property('age')",
 							"});",
 							"",
 							"pm.test('Item_3-1', function(){",
-							"    pm.expect(jsonData3.family.pets.dog.name).to.deep.include('Luky')",
+							"    pm.expect(params.pets.dog.name).to.deep.include('Luky')",
 							"});",
 							"pm.test('Item_3-2', function(){",
-							"    pm.expect(jsonData3.family.pets.dog.name).to.deep.include('Vasya')",
+							"    pm.expect(params.pets.dog.name).to.deep.include('Vasya')",
 							"});",
 							"",
 							"pm.test('Item_4-1', function(){",
-							"    pm.expect(jsonData3.family.pets.cat.name).to.deep.include('Sunny')",
+							"    pm.expect(params.pets.cat.name).to.deep.include('Sunny')",
+							"});",
+							"",
+							"pm.test('Item_5-1', function(){",
+							"    pm.expect(params.pets.dog.age).to.deep.include+(4)",
+							"});",
+							"",
+							"pm.test('Item_5-2', function(){",
+							"    pm.expect(params.pets.dog.age).to.deep.include+(6)",
 							"});",
 							"",
 							"let req = pm.request.url.query.toObject();",
 							"",
-							"pm.test('Item_5-1',function(){",
+							"pm.test('Item_6-1',function(){",
 							"pm.expect(jsonData3.name).to.deep.equal(req.name)",
 							"});",
 							"",
-							"pm.test('Item_5-2',function(){",
+							"pm.test('Item_6-2',function(){",
 							"pm.expect(jsonData3.name).to.deep.equal(req.age)",
 							"});",
 							"",
-							"pm.test('Item_6-1',function(){",
+							"pm.test('Item_7-1',function(){",
 							"pm.expect(jsonData3.age).to.deep.equal(req.age)",
 							"});",
 							"",
-							"pm.test('Item_6-2',function(){",
+							"pm.test('Item_7-2',function(){",
 							"pm.expect(jsonData3.age).to.deep.equal(req.name)",
 							"});",
 							"",
-							"pm.test('Item_7-1',function(){",
+							"pm.test('Item_8-1',function(){",
 							"pm.expect(jsonData3.salary).to.deep.equal(Number(req.salary))",
 							"});",
 							""
@@ -332,6 +336,144 @@
 						{
 							"key": "salary",
 							"value": "8000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post_user_info_2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Tanya",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "28",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "3000",
+							"type": "text"
+						},
+						{
+							"key": "auth_token",
+							"value": "{{token}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}:{{port}}/user_info_2",
+					"host": [
+						"{{url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_object_info_4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"let jsD_OI4 = pm.response.json();",
+							"let req_OI4= pm.request.url.query.toObject();",
+							"",
+							"pm.test('Item_1-1_OI4',function(){",
+							"pm.expect(req_OI4.name).to.deep.equal(\"Tanya\")",
+							"});",
+							"pm.test('Item_1-2_OI4',function(){",
+							"pm.expect(req_OI4.name).to.deep.equal(\"Egor\")",
+							"});",
+							"",
+							"pm.test('Item_2-1_OI4',function(){",
+							"pm.expect(req_OI4.age).to.deep.equal(\"28\")",
+							"});",
+							"pm.test('Item_2-2_OI4',function(){",
+							"pm.expect(req_OI4.age).to.deep.equal(\"29\")",
+							"});",
+							"",
+							"let req_OI4_salary = req_OI4.salary;",
+							"console.log(req_OI4_salary);",
+							"",
+							"let resp_OI4_salary = jsD_OI4.salary;",
+							"console.log(resp_OI4_salary);",
+							"",
+							"let zero_param_salary_response = jsD_OI4.salary[0];",
+							"console.log(zero_param_salary_response);",
+							"",
+							"let first_param_salary_response = Number(jsD_OI4.salary[1]);",
+							"console.log(first_param_salary_response);",
+							"",
+							"let second_param_salary_response = Number(jsD_OI4.salary[2]);",
+							"console.log(second_param_salary_response);",
+							"",
+							"pm.test('Item_3-1_OI4',function(){",
+							"pm.expect(zero_param_salary_response).to.deep.equal(Number(req_OI4_salary))",
+							"});",
+							"",
+							"pm.test('Item_4-1_OI4',function(){",
+							"pm.expect(first_param_salary_response).to.deep.equal((req_OI4_salary)*2)",
+							"});",
+							"pm.test('Item_4-2_OI4',function(){",
+							"pm.expect(first_param_salary_response).to.deep.equal((req_OI4_salary)*3)",
+							"});",
+							"",
+							"pm.test('Item_5-1_OI4',function(){",
+							"pm.expect(second_param_salary_response).to.deep.equal((req_OI4_salary)*3)",
+							"});pm.test('Item_5-2_OI4',function(){",
+							"pm.expect(second_param_salary_response).to.deep.equal((req_OI4_salary)*4)",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}:{{port}}/object_info_4?name={{name}}&age={{age}}&salary={{salary}}",
+					"host": [
+						"{{url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "{{name}}"
+						},
+						{
+							"key": "age",
+							"value": "{{age}}"
+						},
+						{
+							"key": "salary",
+							"value": "{{salary}}"
 						}
 					]
 				}
