@@ -1,0 +1,259 @@
+{
+	"info": {
+		"_postman_id": "6f258ddf-570c-4b57-b879-3d1153c28c81",
+		"name": "hw_with_Anatoly",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20738567"
+	},
+	"item": [
+		{
+			"name": "Anatoly_object_info_4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let req_salary = pm.request.url.query.get(\"salary\")",
+							"let resp_salary = pm.response.json().salary;",
+							"",
+							"for (let i = 0; i < resp_salary.length; i++){",
+							"    pm.test(`req_sal * ${i+1} ${req_salary} == resp_salary  ${resp_salary[i]}`, function() {",
+							"        pm.expect(+req_salary*(i+1)).to.deep.equal(+resp_salary[i])",
+							"    });",
+							"};",
+							"",
+							"resp_salary.forEach((e, i) => {",
+							"     pm.test(`req_sal * ${i+1} ${req_salary} == resp_salary  ${resp_salary[i]}`, function() {",
+							"        pm.expect(+req_salary*(i+1)).to.deep.equal(+e)",
+							"})",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_4?name=Tanya&age=28&salary=3000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Tanya"
+						},
+						{
+							"key": "age",
+							"value": "28"
+						},
+						{
+							"key": "salary",
+							"value": "3000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Anatoly_object_info_3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let req_salary = +pm.request.url.query.get(\"salary\");",
+							"let req_age = +pm.request.url.query.get(\"age\");",
+							"let req_name = pm.request.url.query.get(\"name\")",
+							"",
+							"const req_object = {",
+							"    name: req_name,",
+							"    age: req_age,",
+							"    salary: req_salary",
+							"}",
+							"console.log(req_object)",
+							"",
+							"// let resp_salary = +pm.response.json().salary;",
+							"// let resp_age = +pm.response.json().age;",
+							"// let resp_name = pm.response.json().name;",
+							"",
+							"// const resp_object = {",
+							"//     name: resp_name,",
+							"//     age: resp_age,",
+							"//     salary: resp_salary",
+							"// }",
+							"// console.log(resp_object);",
+							"",
+							"const resp_object = {};",
+							"for(key in req_object){",
+							"    if(!isNaN(pm.response.json()[key])){",
+							"        resp_object[key] = +pm.response.json()[key]",
+							"    } else {",
+							"        resp_object[key] = pm.response.json()[key]",
+							"    }",
+							"}",
+							"",
+							"pm.test('req_object == resp_object', function() {",
+							"    pm.expect(req_object).to.deep.equal(resp_object)",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_3?name=Tanya&age=28&salary=8000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_3"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Tanya"
+						},
+						{
+							"key": "age",
+							"value": "28"
+						},
+						{
+							"key": "salary",
+							"value": "8000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Anatoly_user_info_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//---------sposob 1 --------------",
+							"// let array = [];",
+							"",
+							"// for(const key in pm.response.json()){",
+							"//     array.push(key)",
+							"// };",
+							"// console.log(array);",
+							"",
+							"// array.forEach((e) => {",
+							"//     pm.test(`response has a ${e}`, function (){",
+							"//         pm.expect(pm.response.json()).to.have.a.property(e)",
+							"//     });",
+							"// });",
+							"",
+							"// const response = pm.response.json();",
+							"// const counters = [",
+							"//     '',",
+							"//     3.3,",
+							"//     2.7,",
+							"//     3.8,",
+							"//     2,",
+							"//     1",
+							"// ];",
+							"",
+							"// array.forEach((e,i) => {",
+							"//     if( e != 'person') {",
+							"//         pm.test(`nametest`, function(){",
+							"//             pm.expect(+response[e]).to.deep.equal(3000*counters[i])",
+							"//         });",
+							"//     }",
+							"// });",
+							"//---------sposob 2 -------------------",
+							"",
+							"let array = [];",
+							"const salary = 3000;",
+							"const response = pm.response.json();",
+							"const counters = {",
+							"    \"person\" : '',",
+							"    \"start_qa_salary\": 1,",
+							"    \"qa_salary_after_6_months\": 2,",
+							"    \"qa_salary_after_12_months\": 2.7,",
+							"    \"qa_salary_after_1.5_year\": 3.3,",
+							"    \"qa_salary_after_3.5_years\": 3.8",
+							"};",
+							"",
+							"for (const key in counters){",
+							"    pm.test(`response has a property ${key}`, () => {",
+							"        pm.expect(response).to.have.a.property(key)",
+							"    })",
+							"    if (key != \"person\") {",
+							"        pm.test(`${key} = ${salary} * ${counters}`, () =>{",
+							"            pm.expect(response[key]).to.equal(counters[key] * salary)",
+							"        })",
+							"    };",
+							"};",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "{{name}}",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "{{age}}",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "{{salary}}",
+							"type": "text"
+						},
+						{
+							"key": "auth_token",
+							"value": "{{token}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}:{{port}}/user_info_2",
+					"host": [
+						"{{url}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
